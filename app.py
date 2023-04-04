@@ -4,8 +4,8 @@ clear_console()
 welcome()
 
 user_symbol, computer_symbol = decide_symbols()
-first_player, second_player = randomise_first_to_play(user_symbol, computer_symbol)
-active_player, inactive_player = first_player, second_player
+active_player, inactive_player = randomise_first_to_play(user_symbol, computer_symbol)
+
 
 board = init_board()
 display_board(board)
