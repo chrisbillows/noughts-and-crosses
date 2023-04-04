@@ -3,3 +3,4 @@ my_venv/
 __pycache__/
 .DS_Store
 testing.ipynb
+testing.py

@@ -95,3 +95,14 @@ def computer_move_animation(board, computer_move):
     display_board(board) # Displays board showing computers move + below statement
     print(f"COMPUTER TAKES POSITION {computer_move}")
     os.system('afplay /System/Library/Sounds/Ping.aiff')
+
+
+####################
+#### WINNING
+####################
+
+def check_for_winner(board):
+    for i in range(3):
+        if board[i] == board[i + 1] and board[i] != '-':
+            print(f"That's two {board[i]}s in a row!")
+            return True 
