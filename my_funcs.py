@@ -2,6 +2,7 @@ import os
 import platform
 from random import choice
 from time import sleep
+import sys, tty, termios
 
 ####################
 #### GAME SET UP
@@ -11,8 +12,20 @@ def init_board():
     board = ['-', '-', '-', '-'] 
     return board
 
+
 def welcome():
     print("Lets play tic-tac-toe.\n")
+
+
+def getch():
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(sys.stdin.fileno())
+        ch = sys.stdin.read(1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    return ch
 
 
 def decide_symbols():
@@ -20,18 +33,26 @@ def decide_symbols():
     user_symbol =  input("Do you want to be noughts or crosses (o or x): ")
     symbols.remove(user_symbol)
     computer_symbol = symbols[0]
-    print(f"\nAnd I will play as {computer_symbol}'s.\n")
+    print(46 * "-")
+    print(f"\nGreat! You will play as {user_symbol}'s.")
+    print(f"\nI will play as {computer_symbol}'s.\n")
     return user_symbol, computer_symbol
 
 
 def randomise_first_to_play(user_symbol, computer_symbol):
+    print("\nLets randomly decide who goes first...\n\n" + 46 *"-")
+    sleep(0.2)
+
     players = ['user', 'computer']
     player1 = choice(players)
     players.remove(player1)
 
-    print(f"Going first will be: {player1}")
-    print(f"Going second will be: {''.join(players)}")
+    print(f"\nGoing first will be:  {player1.upper()}")
+    print(f"Going second will be:  {''.join(players).upper()}")
 
+    print("\n\nOkay, LET'S GO!\n\nPress any key to start the game!")
+    getch()
+    
     if player1 == 'user':
         return ('user', user_symbol), ('computer', computer_symbol)
     else:
