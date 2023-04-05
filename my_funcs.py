@@ -25,19 +25,17 @@ def decide_symbols():
 
 
 def randomise_first_to_play(user_symbol, computer_symbol):
-    print('Randomly picking who goes first...')
     players = ['user', 'computer']
     player1 = choice(players)
     players.remove(player1)
-    player2 = players[0]
 
     print(f"Going first will be: {player1}")
-    print(f"Going second will be: {player2}")
+    print(f"Going second will be: {''.join(players)}")
 
     if player1 == 'user':
-        return (player1, user_symbol), (player2, computer_symbol)
+        return ('user', user_symbol), ('computer', computer_symbol)
     else:
-        return (player1, computer_symbol), (player2, user_symbol)
+        return ('computer', computer_symbol), ('user', user_symbol)
 
 
 ####################
