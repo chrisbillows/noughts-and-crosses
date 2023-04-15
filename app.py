@@ -1,5 +1,6 @@
 from my_funcs import *
 
+
 clear_console()
 welcome()
 
@@ -22,11 +23,13 @@ while moves > 0:
     display_board(board)
     
     if check_for_winner(board) == True:
-        print(f"{active_player[0].upper()} is the winner!")
+        winner_symbol_animation(active_player)
+        end_game_msg(active_player)
+        # print(f"{active_player[0].upper()} is the winner!")
         break
 
     moves -= 1
     active_player, inactive_player = inactive_player, active_player
 
 
-print("Thanks for playing!")
+print("\n\nThanks for playing!")
