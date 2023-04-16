@@ -1,11 +1,12 @@
 from my_funcs import *
 
 
-clear_console()
 welcome()
 
 user_symbol, computer_symbol = decide_symbols()
 active_player, inactive_player = randomise_first_to_play(user_symbol, computer_symbol)
+
+game_start()
 
 board = init_board()
 display_board(board)

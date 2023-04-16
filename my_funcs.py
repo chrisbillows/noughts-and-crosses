@@ -3,7 +3,7 @@ import readchar
 
 import os
 import platform
-from random import choice
+from random import choice, randint
 from time import sleep
 from graphics import *
 
@@ -17,6 +17,7 @@ def init_board():
 
 
 def welcome():
+    clear_console()
     print("Lets play tic-tac-toe.\n")
 
 
@@ -32,7 +33,17 @@ def wait_for_x_or_o():
             return key
         else:
             print("\n------INVALID INPUT------\n\nPlease press either'o' or 'x': ")
-  
+
+def wait_for_h_or_t():
+    while True:
+        key = readchar.readkey().lower()
+        if key == "h" or key == "t":
+            user_symbol = key
+            return key
+        else:
+            print("\n------INVALID INPUT------\n\nPlease press either'h' or 't': ")
+
+
 
 def decide_symbols():
     symbols = ['x', 'o']
@@ -45,13 +56,13 @@ def decide_symbols():
     print("\n", 46 * "-")
     print(f"\nGreat! You will play as {user_symbol}'s.")
     print(f"\nI will play as {computer_symbol}'s.\n")
-
+  
     return user_symbol, computer_symbol
 
 
 def randomise_first_to_play(user_symbol, computer_symbol):
-    print("\nLets randomly decide who goes first...\n\n" + 46 *"-")
-    sleep(2)
+    print("\nPress any key to randomise goes first...\n\n" + 46 *"-")
+    computer_thinking_animation()
 
     players = ['user', 'computer']
     player1 = choice(players)
@@ -59,14 +70,19 @@ def randomise_first_to_play(user_symbol, computer_symbol):
 
     print(f"\nGoing first will be:  {player1.upper()}")
     print(f"Going second will be:  {''.join(players).upper()}")
-
-    print("\n\nOkay, LET'S GO!\n\nPress any key to start the game!")
-    wait_for_any_key()
+    os.system('afplay /System/Library/Sounds/Ping.aiff')
+    sleep(1)
     
     if player1 == 'user':
         return ('user', user_symbol), ('computer', computer_symbol)
     else:
         return ('computer', computer_symbol), ('user', user_symbol)
+
+
+def game_start():
+    print("\n\nOkay, LET'S GO!\n\nPress any key to start the game!")
+    wait_for_any_key()
+
 
 
 ####################
@@ -112,7 +128,7 @@ def computer_move(board, computer_symbol):
 
 
 def computer_thinking_animation():
-    print("COMPUTER TO MOVE", end='')
+    print("COMPUTER PROCESSING", end='')
     for i in range(5):
         sleep(0.2)
         print('.', end='', flush=True)
