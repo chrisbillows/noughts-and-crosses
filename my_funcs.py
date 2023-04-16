@@ -1,4 +1,5 @@
 from playsound import playsound
+import readchar
 
 import os
 import platform
@@ -20,15 +21,8 @@ def welcome():
     print("Lets play tic-tac-toe.\n")
 
 
-def getch():
-    fd = sys.stdin.fileno()
-    old_settings = termios.tcgetattr(fd)
-    try:
-        tty.setraw(sys.stdin.fileno())
-        ch = sys.stdin.read(1)
-    finally:
-        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    return ch
+def wait_for_any_key():
+    readchar.readkey()
 
 
 def decide_symbols():
@@ -44,7 +38,7 @@ def decide_symbols():
 
 def randomise_first_to_play(user_symbol, computer_symbol):
     print("\nLets randomly decide who goes first...\n\n" + 46 *"-")
-    sleep(0.2)
+    sleep(2)
 
     players = ['user', 'computer']
     player1 = choice(players)
@@ -54,7 +48,7 @@ def randomise_first_to_play(user_symbol, computer_symbol):
     print(f"Going second will be:  {''.join(players).upper()}")
 
     print("\n\nOkay, LET'S GO!\n\nPress any key to start the game!")
-    getch()
+    wait_for_any_key()
     
     if player1 == 'user':
         return ('user', user_symbol), ('computer', computer_symbol)
@@ -128,6 +122,7 @@ def check_for_winner(board):
         if board[i] == board[i + 1] and board[i] != '-':
             #print(f"That's two {board[i]}s in a row!")
             return True 
+
 
 def winner_symbol_animation(active_player):
     if active_player[1] == 'x':
