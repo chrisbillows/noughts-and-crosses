@@ -1,45 +1,31 @@
 import readchar
-from time import sleep
 
-def press_x_or_o():
-    print("SELECT o OR x")
-    user_symbol = None
-
+def wait_for_x_or_o():
     while True:
         key = readchar.readkey().lower()
         if key == "o" or key == "x":
             user_symbol = key
-            break
+            return key
         else:
-            print("INVALID INPUT. PLEASE SELECT o OR x")
+            print("\n------INVALID INPUT------\n\nPlease press either'o' or 'x': ")
+  
 
-    print(f"GREAT. YOU HAVE SELECTED {user_symbol.upper()}")
+def decide_symbols():
+    symbols = ['x', 'o']
+    print("Do you want to be noughts or crosses (o or x): ")
+    user_symbol = wait_for_x_or_o()
+        
+    symbols.remove(user_symbol)
+    computer_symbol = symbols[0]
 
-def press_any_key():
-    print("\n\nOkay, LET'S GO!\n\nPress any key to start the game!")
-    key = readchar.readkey().lower()
-    # while key == '':
-    #     print("not pressed yet")
-    #     sleep(0.2)    
-    return type(key)
+    print("\n", 46 * "-")
+    print(f"\nGreat! You will play as {user_symbol}'s.")
+    print(f"\nI will play as {computer_symbol}'s.\n")
 
-    # while True:
-    #     key = readchar.readkey().lower()
-    #     if key == "o" or key == "x":
-    #         user_symbol = key
-    #         break
-    #     else:
-    #         print("INVALID INPUT. PLEASE SELECT o OR x")
-
-    # print(f"GREAT. YOU HAVE SELECTED {user_symbol.upper()}")
-
-# my_str = press_any_key()
-
-# if my_str != '':
-#     print("STRING")
-# else:
-#     print("TWAT")
-print(press_any_key())
+    return user_symbol, computer_symbol
 
 
 
+user_symbol, computer_symbol = decide_symbols()
+
+print(user_symbol)
