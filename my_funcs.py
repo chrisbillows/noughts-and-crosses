@@ -5,7 +5,6 @@ import os
 import platform
 from random import choice
 from time import sleep
-import sys, tty, termios
 from graphics import *
 
 ####################
